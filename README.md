@@ -1,7 +1,7 @@
 # Galopp-Scraper
 ### Horse racing history scraper for the webpage galopp-statistik.de
 
-Galopp-Scraper is a script build with [BeautifulSoup] that scrapes all the races that are in their database on https://www.galopp-statistik.de/DisplayErgebnis.php?id= ,where at the end is an ID for the corresponding race (rangin from 0 up to 9214, resulting in 9215 races).
+Galopp-Scraper is a script build with [BeautifulSoup] that scrapes all the races that are in their database on https://www.galopp-statistik.de/DisplayErgebnis.php?id= ,where at the end an ID has to be inserted for accessing the corresponding race (ranging from 0 up to 9214, on the 17. Nov. 2020).
 
 It is meant to be used later on in an machine learning program for ranking horses in a race. But for further usability i also scrape more information that ar enot explicitly necessarry for my (direct) goals.
 
