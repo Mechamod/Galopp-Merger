@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 URL = "https://www.galopp-statistik.de/DisplayErgebnis.php?id="
 
 def scrape_race_by_id(id):
-    id = 9100 # DELETE ME
     race_information = []
 
     # General race information
@@ -37,7 +36,6 @@ def scrape_race_by_id(id):
     ground_state = soup.find("div", class_="rennen-druck").text
 
     # Put all info into the race information list
-    race_information.append(header)
     race_information.append(date)
     race_information.append(location)
     race_information.append(distance)
@@ -47,9 +45,9 @@ def scrape_race_by_id(id):
     race_information.append(ground_state)
 
     # Get all horse entries
+    horse_entry = []
     entries = soup.find_all("div", class_="table-result-row")
     for entry in entries:
-        horse_entry = []
 
         # (Re)set horse information
         trainer_name = weight  = category = race_class = None
@@ -69,12 +67,24 @@ def scrape_race_by_id(id):
         horse_entry.append(jockey)
         horse_entry.append(trainer)
         horse_entry.append(weight)
-        race_information.append(horse_entry)
+    race_information.append(horse_entry)
 
     return race_information
 
 if __name__ == "__main__":
-    upper_bound = 1 # Change to number of races to scrape
-    for id in range(upper_bound):
-        info = scrape_race_by_id(id)
-        print(info)
+    number_of_races = 9223 # Change to number of races to scrape
+
+    scraped_data = []
+    for id in range(number_of_races):
+        scraped_data.append(scrape_race_by_id(id))
+
+    c = ["Date",
+         "Location",
+         "Distance",
+         "Prize",
+         "Category",
+         "Class",
+         "Ground_state",
+         "Horses"]
+    information_dataframe = pd.DataFrame(data=scraped_data, columns=c)
+    information_dataframe.to_csv("racing_history.csv", index=False)
