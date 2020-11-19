@@ -40,8 +40,9 @@ To mention is that:
 
 * BTC: 1DixZsj9HdRMCD16co1BbhXfJoaUrEptcE 
 * ETH: 0xf5d23ad5b592a6f078ca18aa5eecc55edb1ce532
-* Paypal: paypal.me/Mechamod
-
+<a href="https://paypal.me/Mechamod">
+  <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="170"/>
+</a>
 
 
 
