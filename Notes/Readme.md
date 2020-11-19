@@ -53,7 +53,7 @@ WEBCRAWLER ARCHITECTURE FROM WIKIPEADIA, CITATION TO BE DONE
 [//]: # (These are reference links used in the body)
    [PyQt5]: <https://riverbankcomputing.com/software/pyqt/downloadr>
    [Galopp]: <https://www.galopp-statistik.de/>
-   [BeutifulSoup]: <https://www.crummy.com/software/BeautifulSoup/>
+   [BeautifulSoup]: <https://www.crummy.com/software/BeautifulSoup/>
    [Kaggle]: <https://www.kaggle.com/>
    [Dillinger]: <https://dillinger.io/>
 
