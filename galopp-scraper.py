@@ -3,15 +3,16 @@ import requests
 import re
 import time
 import math
+import gc
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
 
 URL = "https://www.galopp-statistik.de/DisplayErgebnis.php?id="
-NUMBER_OF_RACES = 10 # Change to number of races to scrape
-START_ID = 1
+NUMBER_OF_RACES = 1223 # Change to number of races to scrape
+START_ID = 8000
 RACE_IDS = [x for x in range(START_ID, START_ID+NUMBER_OF_RACES)]
-CHUNK_SIZE = 1000
+CHUNK_SIZE = 2000
 
 def scrape_race_by_id(id):
     """
@@ -25,9 +26,9 @@ def scrape_race_by_id(id):
     race_information = []
 
     # General race information
-    date = location = distance = ground_state = prize = category = None
+    date = location = distance = ground_state = prize = category = race_class = None
 
-    print(f"Scraping page: {id}")
+    # Make request
     request = requests.get(URL + str(id))
     soup = BeautifulSoup(request.content, "lxml")
 
@@ -71,7 +72,7 @@ def scrape_race_by_id(id):
     for entry in entries:
 
         # (Re)set horse information
-        trainer_name = weight  = category = race_class = None
+        trainer_name = weight  = None
         placement = horse_name = jockey_name = None
 
         # Get all information
@@ -93,41 +94,50 @@ def scrape_race_by_id(id):
 
     return race_information
 
-if __name__ == "__main__":
+def scrape():
     start_time = time.time()
-    race_information_list = []
 
     # Splitting the RACE_IDS into chunks, so it can be saved after each chunk,
     # reducing the memory usage
+    #
+    # Add START_ID at the end, for the shift if already some has been loaded!
     for chunk_number in range(math.ceil(len(RACE_IDS)/CHUNK_SIZE)):
-        chunk_start = chunk_number*1000
-        chunk_end = min(((chunk_number+1)*1000)-1, len(RACE_IDS)-1)
+        race_information_list = []
+        chunk_start = (chunk_number*CHUNK_SIZE)+START_ID
+        chunk_end = min(((chunk_number+1)*CHUNK_SIZE)-1, len(RACE_IDS))+START_ID
         print(f"Scraping chunks from: {chunk_start} to {chunk_end}")
-
+        print(chunk_start, chunk_end)
         # Concurrent scraping for speedups
-        # time without:
-        # time with 8 threads:
-        # time with 16 threads:
+        # time with 16 threads: ~11 min.
         chunk = [x for x in range(chunk_start, chunk_end)]
         with ThreadPoolExecutor(max_workers=min(16, len(chunk))) as executor:
             results = executor.map(scrape_race_by_id, chunk)
 
-        # Save chunk
-        for result in results:
-            race_information_list.append(result)
+            # Save chunk
+            for result in results:
+                race_information_list.append(result)
 
-        column_names = ["Date",
-                        "Location",
-                        "Distance",
-                        "Prize",
-                        "Category",
-                        "Class",
-                        "Ground_state",
-                        "Horses"]
+            column_names = ["Date",
+                            "Location",
+                            "Distance",
+                            "Prize",
+                            "Category",
+                            "Class",
+                            "Ground_state",
+                            "Horses"]
 
-        print(f"Saving chunks from: {chunk_start} to {chunk_end}")
-        information_dataframe = pd.DataFrame(data=race_information_list, columns=column_names)
-        information_dataframe.to_csv(f"racing_history-{chunk_start}-{chunk_end}.csv", index=False)
+            print(f"Saving chunks from: {chunk_start} to {chunk_end}")
+            information_dataframe = pd.DataFrame(data=race_information_list, columns=column_names)
+            information_dataframe.to_csv(f"racing_history-{chunk_start}-{chunk_end}.csv", index=False)
+            del results # Make (some) space
 
     end_time = time.time()
     print(f"Finished scraping {len(RACE_IDS)} pages in: {(end_time - start_time)/60} minutes.")
+
+def merge_csvs():
+    print("Start merging")
+
+
+if __name__ == "__main__":
+    scrape()
+    merge_csvs()
