@@ -3,10 +3,8 @@ import requests
 import re
 import time
 import math
-import gc
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
-from concurrent.futures import as_completed
 
 URL = "https://www.galopp-statistik.de/DisplayErgebnis.php?id="
 NUMBER_OF_RACES = 1223 # Change to number of races to scrape
@@ -134,10 +132,6 @@ def scrape():
     end_time = time.time()
     print(f"Finished scraping {len(RACE_IDS)} pages in: {(end_time - start_time)/60} minutes.")
 
-def merge_csvs():
-    print("Start merging")
-
 
 if __name__ == "__main__":
     scrape()
-    merge_csvs()
