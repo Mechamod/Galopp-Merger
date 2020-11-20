@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
 URL = "https://www.galopp-statistik.de/DisplayErgebnis.php?id="
-NUMBER_OF_RACES = 1223 # Change to number of races to scrape
-START_ID = 8000
+NUMBER_OF_RACES = 5223 # Change to number of races to scrape
+START_ID = 4000
 RACE_IDS = [x for x in range(START_ID, START_ID+NUMBER_OF_RACES)]
 CHUNK_SIZE = 2000
 
@@ -33,8 +33,8 @@ def scrape_race_by_id(id):
     # Get header information (date and location)
     header = soup.find("div", class_="renntagKopf")
     if len(header) >= 2:
-        date = header.find_all("div", class_="ZeitundOrt")[0]
-        location = header.find_all("div", class_="ZeitundOrt")[1]
+        date = header.find_all("div", class_="ZeitundOrt")[0].text
+        location = header.find_all("div", class_="ZeitundOrt")[1].text
 
     # Get distance and prize
     distance_prize = soup.find("div", class_="zoile distance-cash")
@@ -54,6 +54,22 @@ def scrape_race_by_id(id):
 
     # Get the state of the ground
     ground_state = soup.find("div", class_="rennen-druck").text
+
+    # Remove newlines if variable is not null
+    if date is not None:
+        date = date.replace("\n", "")
+    if location is not None:
+        location = location.replace("\n", "")
+    if distance is not None:
+        distance = distance.replace("\n", "")
+    if prize is not None:
+        prize = prize.replace("\n", "")
+    if category is not None:
+        category = category.replace("\n", "")
+    if race_class is not None:
+        race_class = race_class.replace("\n", "")
+    if ground_state is not None:
+        ground_state = ground_state.replace("\n", "")
 
     # Put all info into the race information list
     race_information.append(date)
@@ -81,6 +97,18 @@ def scrape_race_by_id(id):
             jockey = jockey_trainer[0].text
             trainer = jockey_trainer[1].text
         weight = entry.find("div", class_="weight").text
+
+        # Remove newlines if variable is not null
+        if placement is not None:
+            placement = placement.replace("\n", "")
+        if horse_name is not None:
+            horse_name = horse_name.replace("\n", "")
+        if jockey is not None:
+            jockey = jockey.replace("\n", "")
+        if trainer is not None:
+            trainer = trainer.replace("\n", "")
+        if weight is not None:
+            weight = weight.replace("\n", "")
 
         # Put it into a horse entry and add it to the race information
         horse_entry.append(placement)
