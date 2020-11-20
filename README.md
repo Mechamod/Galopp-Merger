@@ -23,10 +23,11 @@ $ python3 galopp-scraper.py
 
 ### Donations
 
-BTC: 1DixZsj9HdRMCD16co1BbhXfJoaUrEptcE
-
-ETH: 0xf5d23ad5b592a6f078ca18aa5eecc55edb1ce532
-
+BTC: 1DixZsj9HdRMCD16co1BbhXfJoaUrEptcE   
+ETH: 0xf5d23ad5b592a6f078ca18aa5eecc55edb1ce532  
+<a href="https://paypal.me/Mechamod">
+  <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="170"/>
+</a>
 
 [//]: # (These are reference links used in the body)
    [BeautifulSoup]: <https://www.crummy.com/software/BeautifulSoup/>
