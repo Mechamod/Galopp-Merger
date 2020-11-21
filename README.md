@@ -1,24 +1,29 @@
-# Galopp-Scraper
-### Horse racing history scraper for the webpage galopp-statistik.de
+# Galopp-Merger
+### Horse ranker based on the history of the webpage galopp-statistik.de
+Galopp-Merger is a project divided into multiple scripts for each step of the machine learning process (See the _Notes_ folder for a comprehensive explanation of the whole project)
 
-Galopp-Scraper is a script build with [BeautifulSoup] that scrapes all the races that are in their database on https://www.galopp-statistik.de/DisplayErgebnis.php?id= ,where at the end an ID has to be inserted for accessing the corresponding race (ranging from 0 up to 9214, on the 17. Nov. 2020).
-
-It is meant to be used later on in an machine learning program for ranking horses in a race. But for further usability it also scrapes more information that are not explicitly necessarry for my (direct) goals.
+### Project workflow
+Roughly it follows the following steps:
+- Scrape data from galopp-statistik.de
+- Clean data
+- Train a model that ranks horses in a way that the order of winners can be determined
+- Improvement ideas (Only theoretically)
 
 ### Contents
 The contents of this repository are organized as...:
 
-  - Galopp-Scraper.py: The entry point of the script
-  - Notes: My plans and notes of developing this script
+  - galopp-scraper.py: Scrapes the races in a given range of id's and saves them into multiple csv files (Why? See the _Notes_ folder)
+  - galopp-merger.py: Merges the different csv files into one
+  - Notes/Notes.md: My plans and notes of developing this script
 
 ### Installation
 
 The script requires Python3 to run.
-Install additional dependencies from the requirements.txt file and run galopp-scraper.py
+Install additional dependencies from the requirements.txt file and run the various scripts in order as needed.
 
 ```sh
 $ pip3 install -r requirements.txt
-$ python3 galopp-scraper.py
+$ python3 [script].py
 ```
 
 ### Donations
