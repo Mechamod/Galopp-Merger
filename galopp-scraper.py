@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
 
 URL = "https://www.galopp-statistik.de/DisplayErgebnis.php?id="
-NUMBER_OF_RACES = 5223 # Change to number of races to scrape
-START_ID = 4000
+NUMBER_OF_RACES = 9223 # Change to number of races to scrape
+START_ID = 1
 RACE_IDS = [x for x in range(START_ID, START_ID+NUMBER_OF_RACES)]
 CHUNK_SIZE = 2000
 

@@ -11,23 +11,19 @@ def merge():
             file_path = str(os.path.join(root, file))
             if file_path[-4:] == ".csv":
                 csv_file_paths.append(file_path)
+    csv_file_paths.sort() # Sort at the end for correct ordered files!
 
     # Load each file as text and append it to another.
-    # Remove first line, as it contains column names
-    got_columns = False
-    with open("all_races.csv", "a") as all_races_csv:
+    with open("all_races.csv", "w") as all_races_csv:
+        all_races_csv.write("Date,Location,Distance,Prize,Category,Class,Ground_state,Horses")
         for path in csv_file_paths:
             with open(path, "r") as csv_file:
+                column_line = True
                 for line in csv_file.readlines():
-
-                    # Get columns if not done yet
-                    if not got_columns:
-                        all_races_csv.write(line)
-                        got_column = True
-
-                    # Write each line if it isnt the column line
-                    if not line.startswith("Date"):
-                        all_races_csv.write(line)
+                    if column_line:
+                        column_line = False
+                        continue
+                    all_races_csv.write(line)
 
 
 if __name__ == '__main__':
