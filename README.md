@@ -10,7 +10,7 @@ Roughly it follows the following steps:
 - Improvement ideas (Only theoretically)
 
 ### Contents
-The contents of this repository are organized as...:
+The contents of this repository are organized like:
 
   - galopp-scraper.py: Scrapes the races in a given range of id's and saves them into multiple csv files (Why? See the _Notes_ folder)
   - galopp-merger.py: Merges the different csv files into one
@@ -34,5 +34,5 @@ ETH: 0xf5d23ad5b592a6f078ca18aa5eecc55edb1ce532
   <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="170"/>
 </a>
 
-[//]: # (These are reference links used in the body)
+[//]: #
    [BeautifulSoup]: <https://www.crummy.com/software/BeautifulSoup/>
