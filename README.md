@@ -1,6 +1,6 @@
-# Galopp-Merger
+# Galopp-Ranker
 ### Horse ranker based on the history of the webpage galopp-statistik.de
-Galopp-Merger is a project divided into multiple scripts for each step of the machine learning process (See the _Notes_ folder for a comprehensive explanation of the whole project)
+Galopp-Ranker is a project divided into multiple scripts for each step of the machine learning process (See the _Notes_ folder for a comprehensive explanation of the whole project)
 
 ### Project workflow
 Roughly it follows the following steps:
