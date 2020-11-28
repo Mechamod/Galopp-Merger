@@ -14,7 +14,9 @@ The contents of this repository are organized like:
 
   - galopp-scraper.py: Scrapes the races in a given range of id's and saves them into multiple csv files (Why? See the _Notes_ folder)
   - galopp-merger.py: Merges the different csv files into one
+  - galopp-preprocessor.ipynb: Preprocesses the dataset out of the galopp-merger and returns the cleaned dataset and a dataset with all the horses
   - Notes/Notes.md: My plans and notes of developing this script
+  - csvs/: A foler that contains all the created csv files
 
 ### Installation
 
