@@ -154,7 +154,7 @@ def scrape():
 
             print(f"Saving chunks from: {chunk_start} to {chunk_end}")
             information_dataframe = pd.DataFrame(data=race_information_list, columns=column_names)
-            information_dataframe.to_csv(f"racing_history-{chunk_start}-{chunk_end}.csv", index=False)
+            information_dataframe.to_csv(f"csvs/racing_history-{chunk_start}-{chunk_end}.csv", index=False)
             del results # Make (some) space
 
     end_time = time.time()
