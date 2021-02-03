@@ -2,6 +2,11 @@
 ### Horse ranker based on the history of the website galopp-statistik.de
 Galopp-Ranker is a project divided into multiple scripts for each step of the machine learning process (See the _Notes_ folder for a comprehensive explanation of the whole project)
 
+|                         | Method 1                       | Method 2                       |
+| ----------------------- | ------------------------------ | ------------------------------ |
+| Direct Discrimination   | ¬A, B ➞ ¬C ⟹ A, B ➞ ¬C         | ¬A, B ➞ ¬C ⟹ ¬A, B ➞ C         |
+| Indirect Discrimination | ¬A, B, ¬D ➞ ¬C ⟹ A, B, ¬D ➞ ¬C | ¬A, B, ¬D ➞ ¬C ⟹ ¬A, B, ¬D ➞ C |
+
 ### Project workflow
 Roughly it follows the following steps:
 - Scrape data from galopp-statistik.de
